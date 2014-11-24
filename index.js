@@ -10,29 +10,50 @@ function Printer(opts, print) {
     opts = {}
   }
   this.printFn = print || function() {}
-  this.opts = opts || {}
+  opts = opts || {}
   this.lineCount = 0
   this.stream = opts.stream || process.stdout
   this.charm = charm(this.stream)
   // this.charm.cursor(true)
+  this.scheduledLogs = []
+  this.interval = opts.interval || 100
+  
+  this.startTime = Date.now()
   
 }
 
 Printer.prototype.start = function () {
   var self = this
-  this.timer = setInterval(this.print.bind(this), 100)
+  this.timer = setInterval(this.print.bind(this), this.interval)
 }
 
-Printer.prototype.print = function () {
-  var output = this.printFn()
+// log before
+Printer.prototype.log = function (str) {
+  this.scheduledLogs.push(str)
+}
+
+Printer.prototype.erase = function () {
   while(--this.lineCount > 0) {
     this.charm.up(1)
     this.charm.erase('line')
   }
-  this.lineCount = output.split('\n').length
-  this.stream.write(output)
 }
 
-Printer.prototype.stop = function () {
+Printer.prototype.print = function () {
+  this.erase()
+
+  var log
+  while(log = this.scheduledLogs.shift())
+    this.stream.write(log + '\n')
+
+  var output = this.printFn(Date.now() - this.startTime)
+  this.lineCount = output.split('\n').length + 1
+  this.stream.write(output + '\n')
+}
+
+Printer.prototype.stop = function (stay) {
+  if(!stay) this.erase()
   clearInterval(this.timer)
 }
+
+Printer.prototype.end = Printer.prototype.stop

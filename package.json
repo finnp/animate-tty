@@ -1,0 +1,27 @@
+{
+  "name": "animate-tty",
+  "version": "1.0.0",
+  "description": "Animate things like progress bars on the tty",
+  "main": "index.js",
+  "dependencies": {
+    "charm": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finnp/animate-tty"
+  },
+  "keywords": [
+    "tty",
+    "terminal"
+  ],
+  "author": "Finn Pauls",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/finnp/animate-tty/issues"
+  },
+  "homepage": "https://github.com/finnp/animate-tty"
+}
