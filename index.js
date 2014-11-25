@@ -41,17 +41,21 @@ Printer.prototype.erase = function () {
 
 Printer.prototype.print = function () {
   this.erase()
-
-  var log
-  while(log = this.scheduledLogs.shift())
-    this.stream.write(log + '\n')
+  this.writeLogs()
 
   var output = this.printFn(Date.now() - this.startTime)
   this.lineCount = output.split('\n').length + 1
   this.stream.write(output + '\n')
 }
 
+Printer.prototype.writeLogs = function () {
+  var log
+  while(log = this.scheduledLogs.shift())
+    this.stream.write(log + '\n')
+}
+
 Printer.prototype.stop = function (stay) {
+  this.writeLogs()
   if(!stay) this.erase()
   clearInterval(this.timer)
 }
