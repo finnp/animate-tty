@@ -24,6 +24,7 @@ function Printer(opts, print) {
 
 Printer.prototype.start = function () {
   var self = this
+  this.print()
   this.timer = setInterval(this.print.bind(this), this.interval)
 }
 
