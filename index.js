@@ -57,6 +57,7 @@ Printer.prototype.writeLogs = function () {
 
 Printer.prototype.stop = function (stay) {
   this.writeLogs()
+  this.print()
   if(!stay) this.erase()
   clearInterval(this.timer)
 }
