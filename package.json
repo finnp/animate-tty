@@ -1,6 +1,6 @@
 {
   "name": "animate-tty",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Animate things like progress bars on the tty",
   "main": "index.js",
   "dependencies": {
