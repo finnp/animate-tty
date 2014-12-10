@@ -1,7 +1,7 @@
 ## usage
 
 ```js
-var animator = require('progress-log')([opts, ]animateFn)
+var animator = require('animate-tty')([opts, ]animateFn)
 ```
 After `animator.start()` the string returned by `animateFn` is updated to the
 terminal repeatedly.
@@ -33,7 +33,7 @@ but makes sure it doesn't break the animation.
 ## example
 
 ```js
-var animator = require('progress-log')(function (runtime) {
+var animator = require('animate-tty')(function (runtime) {
   return 'Elapsed: '+ Math.floor(runtime / 1000) +' s\n'+ 'Data: ' + Math.random()
 })
 
